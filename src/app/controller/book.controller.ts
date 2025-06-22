@@ -93,7 +93,7 @@ bookRouter.get(
   }
 );
 
-bookRouter.patch(
+bookRouter.put(
   "/:bookId",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -107,6 +107,27 @@ bookRouter.patch(
         success: true,
         message: "Book updated successfully",
         data: book,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+bookRouter.delete(
+  "/:bookId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const bookID = req.params.bookId;
+      const book = await Books.findByIdAndDelete(bookID, { new: true });
+      if (!book) {
+        throw new Error("Book not found");
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Book deleted successfully",
+        data: null,
       });
     } catch (error) {
       next(error);
