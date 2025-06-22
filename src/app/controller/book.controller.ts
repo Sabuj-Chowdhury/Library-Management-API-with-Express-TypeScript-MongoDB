@@ -72,3 +72,23 @@ bookRouter.get("/", async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
+
+bookRouter.get(
+  "/:bookId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.bookId;
+      const books = await Books.findById(id);
+      if (books === null) {
+        throw new Error("ID is wrong/Not found!");
+      }
+      res.status(200).json({
+        success: true,
+        message: "Book retrieved successfully",
+        data: books,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
