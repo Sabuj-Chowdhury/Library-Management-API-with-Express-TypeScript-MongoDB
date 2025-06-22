@@ -23,7 +23,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 // if no path is matched then->
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(400).send({ success: false, message: "Route not found" });
+  res.status(404).send({ success: false, message: "Route not found" });
 });
 
 // GLOBAL error handler
