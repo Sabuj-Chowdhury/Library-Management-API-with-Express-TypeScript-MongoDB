@@ -18,7 +18,25 @@ bookRouter.post("/", async (req: Request, res: Response) => {
     res.status(400).json({
       message: "Books not created!",
       success: false,
-      error: error.message,
+      error: error,
+    });
+  }
+});
+
+bookRouter.get("/", async (req: Request, res: Response) => {
+  try {
+    const books = await Books.find();
+
+    res.json({
+      success: true,
+      message: "Books retrieved successfully",
+      data: books,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to retrieve books",
+      error: error,
     });
   }
 });
