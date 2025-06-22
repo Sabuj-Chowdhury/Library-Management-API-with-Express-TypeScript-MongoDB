@@ -21,7 +21,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-// if not path is matched then->
+// if no path is matched then->
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(400).send({ success: false, message: "Route not found" });
 });
@@ -29,7 +29,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // GLOBAL error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   if (err) {
-    res.status(400).json({
+    res.status(500).json({
       message: err.message || "Internal Server Error",
       success: false,
       error: err,
