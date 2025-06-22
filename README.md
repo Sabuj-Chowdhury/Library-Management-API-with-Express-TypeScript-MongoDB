@@ -40,12 +40,12 @@ A robust Library Management System built with **Express**, **TypeScript**, and *
    ```
 3. Create a `.env` file in the root directory:
    ```env
-   PORT=3000
-   MONGODB_URI=mongodb://localhost:27017/library
+   PORT=5000
+   MONGODB_URI=YOUR MONGODB URI
    ```
 4. Compile TypeScript to JavaScript:
    ```bash
-   yarn tsc
+   npm run build
    ```
 5. Start the server:
    ```bash
