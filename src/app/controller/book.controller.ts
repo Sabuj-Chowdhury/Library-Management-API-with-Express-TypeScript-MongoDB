@@ -92,3 +92,24 @@ bookRouter.get(
     }
   }
 );
+
+bookRouter.patch(
+  "/:bookId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const bookID = req.params.bookId;
+      const updateBook = req.body;
+      const book = await Books.findByIdAndUpdate(bookID, updateBook, {
+        new: true,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Book updated successfully",
+        data: book,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
