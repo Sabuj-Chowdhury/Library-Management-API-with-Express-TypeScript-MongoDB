@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IBook } from "../interface/book.interface";
+import { Borrow } from "./borrow.model";
 
 const bookSchema = new Schema<IBook>(
   {
@@ -44,5 +45,10 @@ const bookSchema = new Schema<IBook>(
     timestamps: true,
   }
 );
+
+bookSchema.method("setUnavailable", function () {
+  this.available = false;
+  return this.save();
+});
 
 export const Books = model("Books", bookSchema);
