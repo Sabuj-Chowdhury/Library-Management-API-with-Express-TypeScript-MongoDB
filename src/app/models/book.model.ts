@@ -51,4 +51,17 @@ bookSchema.method("setUnavailable", function () {
   return this.save();
 });
 
+bookSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate() as Partial<IBook>;
+
+  const newCopies = update?.copies;
+
+  if (typeof newCopies === "number" && newCopies > 0) {
+    update.available = true;
+    this.setUpdate(update); // ✅ Set back the modified update object
+  }
+
+  next();
+});
+
 export const Books = model("Books", bookSchema);
