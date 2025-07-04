@@ -8,7 +8,7 @@ export interface IBook {
     | "HISTORY"
     | "BIOGRAPHY"
     | "FANTASY";
-  isbn: string;
+  isbn: number;
   copies: number;
   available: boolean;
   description?: string;
